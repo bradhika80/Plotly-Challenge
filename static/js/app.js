@@ -114,7 +114,9 @@ function BuildBubbleChart(testSubjectId)
     var data = [trace]
 
   var layout = {
-    title: "Chart "   
+    xaxis :{
+        "title" : "OTU Ids"
+    }
   }
 
   Plotly.plot("bubble", data, layout);
