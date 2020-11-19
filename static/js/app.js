@@ -14,11 +14,32 @@ function PreLoad()
         console.log (samples);
         // populate options for the test Subjects
       PopulateTestSubjectOptions();
+      buildDemographicInformation("960")
 
     });
 
      
 }
+
+
+function buildDemographicInformation(testSubjectId) {
+    
+    // retrieve the test subject information from the meta data 
+
+    testSubject = metadata.filter(d => d.id == testSubjectId)
+   
+    var demoPanel = d3.select("#sample-metadata");
+    // reset the demographic panel
+    demoPanel.html("");
+    console.log(testSubject);
+    // update the demo panel with new subject information    
+    // Iterate through each key and value
+    Object.entries(testSubject[0]).forEach(([key, value]) => {
+        var msg = `${key}:${value}`;
+        demoPanel.append("h6").text(msg);        
+    });
+
+  }
 
 
 //function to prepopulate TestSubject Options
