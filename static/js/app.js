@@ -11,17 +11,18 @@ function PreLoad()
         testSubjects = data.names;
         metadata = data.metadata;
         samples = data.samples;
-        console.log (samples);
         // populate options for the test Subjects
       PopulateTestSubjectOptions();
-      buildDemographicInformation("960")
+      var testSubjectId = testSubjects[0];
+      console.log(testSubjectId);
+      buildDemographicInformation(testSubjectId)
+      BuildHorizontalBarChart(testSubjectId)
 
     });
-
      
 }
 
-
+// A function to build the demographic information
 function buildDemographicInformation(testSubjectId) {
     
     // retrieve the test subject information from the meta data 
@@ -31,15 +32,54 @@ function buildDemographicInformation(testSubjectId) {
     var demoPanel = d3.select("#sample-metadata");
     // reset the demographic panel
     demoPanel.html("");
-    console.log(testSubject);
+  
     // update the demo panel with new subject information    
     // Iterate through each key and value
     Object.entries(testSubject[0]).forEach(([key, value]) => {
         var msg = `${key}:${value}`;
-        demoPanel.append("h6").text(msg);        
+        demoPanel.append("h5").text(msg);        
     });
 
   }
+
+
+// function to build horizontal bar chart
+function BuildHorizontalBarChart(testSubjectId)
+{
+   // filter the sample dataset for the test subjectId
+   testSubjectSample = samples.filter(d => d.id == testSubjectId)
+   
+   console.log(testSubjectSample)
+ 
+   var x = testSubjectSample[0].sample_values.slice(0,10);
+   var y = testSubjectSample[0].otu_ids.slice(0,10);
+   var hover = testSubjectSample[0].otu_labels.slice(0,10)
+   y = y.map(i => "OTU " + i);
+   console.log(y);
+   console.log(x)
+    // Create your trace.
+    var trace = {
+        x: x,
+        y: y,
+        text : hover,
+        type: "bar",
+        orientation: "h"
+    };
+    
+    // 6. Create the data array for our plot
+    var data = [trace];
+    
+    // 7. Define our plot layout
+    var layout = {
+        title: "top 10 OTUs"
+         
+    };
+    
+    // 8. Plot the chart to a div tag with id "bar-plot"
+    Plotly.newPlot("bar", data, layout);
+  
+
+}
 
 
 //function to prepopulate TestSubject Options
