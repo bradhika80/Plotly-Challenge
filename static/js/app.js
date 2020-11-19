@@ -3,6 +3,7 @@
 var testSubjects; 
 var metadata;
 var samples;
+var washFrequency;
 
 // A function to do the initialization before the page loads
 function PreLoad()
@@ -17,7 +18,8 @@ function PreLoad()
       console.log(testSubjectId);
       BuildDemographicInformation(testSubjectId);
       BuildHorizontalBarChart(testSubjectId);
-      BuildBubbleChart(testSubjectId)
+      BuildBubbleChart(testSubjectId);
+      BuildGaugeChart(washFrequency);
 
     });
      
@@ -32,7 +34,8 @@ function optionChanged(testSubjectId) {
     // Build the graphs and demographic data based on the subject Id
     BuildDemographicInformation(testSubjectId);
     BuildHorizontalBarChart(testSubjectId);
-    BuildBubbleChart(testSubjectId)
+    BuildBubbleChart(testSubjectId);
+    BuildGaugeChart(washFrequency);
   }
 
 // A function to build the demographic information
@@ -41,6 +44,8 @@ function BuildDemographicInformation(testSubjectId) {
     // retrieve the test subject information from the meta data 
 
     testSubject = metadata.filter(d => d.id == testSubjectId)
+
+    washFrequency = testSubject[0].wq;
    
     var demoPanel = d3.select("#sample-metadata");
     // reset the demographic panel
@@ -85,7 +90,7 @@ function BuildHorizontalBarChart(testSubjectId)
     
     // 7. Define our plot layout
     var layout = {
-        title: "top 10 OTUs"         
+        title: "Top 10 OTUs "         
     };
     
     // 8. Plot the chart to a div tag with id "bar-plot"
