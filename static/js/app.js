@@ -15,7 +15,7 @@ function PreLoad()
       PopulateTestSubjectOptions();
       var testSubjectId = testSubjects[0];
       console.log(testSubjectId);
-      buildDemographicInformation(testSubjectId);
+      BuildDemographicInformation(testSubjectId);
       BuildHorizontalBarChart(testSubjectId);
       BuildBubbleChart(testSubjectId)
 
@@ -23,8 +23,20 @@ function PreLoad()
      
 }
 
+// a function to get the onchange event for the selector
+function optionChanged(testSubjectId) {
+
+    // Prevent the page from refreshing
+   // d3.event.preventDefault();
+    
+    // Build the graphs and demographic data based on the subject Id
+    BuildDemographicInformation(testSubjectId);
+    BuildHorizontalBarChart(testSubjectId);
+    BuildBubbleChart(testSubjectId)
+  }
+
 // A function to build the demographic information
-function buildDemographicInformation(testSubjectId) {
+function BuildDemographicInformation(testSubjectId) {
     
     // retrieve the test subject information from the meta data 
 
@@ -120,9 +132,6 @@ function BuildBubbleChart(testSubjectId)
   }
 
   Plotly.plot("bubble", data, layout);
-
-
-
 }
 
 //function to prepopulate TestSubject Options
