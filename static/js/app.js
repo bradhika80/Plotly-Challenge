@@ -15,8 +15,9 @@ function PreLoad()
       PopulateTestSubjectOptions();
       var testSubjectId = testSubjects[0];
       console.log(testSubjectId);
-      buildDemographicInformation(testSubjectId)
-      BuildHorizontalBarChart(testSubjectId)
+      buildDemographicInformation(testSubjectId);
+      BuildHorizontalBarChart(testSubjectId);
+      BuildBubbleChart(testSubjectId)
 
     });
      
