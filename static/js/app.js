@@ -49,11 +49,12 @@ function BuildHorizontalBarChart(testSubjectId)
    // filter the sample dataset for the test subjectId
    testSubjectSample = samples.filter(d => d.id == testSubjectId)
    
+  // testSubjectSample[0].reverse();
    console.log(testSubjectSample)
  
    var x = testSubjectSample[0].sample_values.slice(0,10);
    var y = testSubjectSample[0].otu_ids.slice(0,10);
-   var hover = testSubjectSample[0].otu_labels.slice(0,10)
+   var hover = testSubjectSample[0].otu_labels.slice(0,10);
    y = y.map(i => "OTU " + i);
    console.log(y);
    console.log(x)
@@ -71,8 +72,7 @@ function BuildHorizontalBarChart(testSubjectId)
     
     // 7. Define our plot layout
     var layout = {
-        title: "top 10 OTUs"
-         
+        title: "top 10 OTUs"         
     };
     
     // 8. Plot the chart to a div tag with id "bar-plot"
@@ -81,6 +81,46 @@ function BuildHorizontalBarChart(testSubjectId)
 
 }
 
+// function to build bubble chart
+function BuildBubbleChart(testSubjectId)
+{
+    // filter the sample dataset for the test subjectId
+   testSubjectSample = samples.filter(d => d.id == testSubjectId)
+
+   //testSubjectSample[0].reverse();
+   console.log(testSubjectSample)
+ 
+   var x = testSubjectSample[0].sample_values;
+   var y = testSubjectSample[0].otu_ids;
+   var text = testSubjectSample[0].otu_labels;
+
+
+   // Reference : https://plotly.com/javascript/bubble-charts/
+
+   var trace =
+    {
+      x: x,
+      y: y,
+      text: text,
+      mode: "markers",
+      marker: {
+        size: x,
+        color: y,
+        colorscale: "Earth"
+      }
+    }
+  
+    var data = [trace]
+
+  var layout = {
+    title: "Chart "   
+  }
+
+  Plotly.plot("bubble", data, layout);
+
+
+
+}
 
 //function to prepopulate TestSubject Options
 function PopulateTestSubjectOptions(){
