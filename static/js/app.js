@@ -16,7 +16,7 @@ function Initialize()
       PopulateTestSubjectOptions();
       var testSubjectId = testSubjects[0];
       console.log(testSubjectId);
-      BuildDemographicInformation(testSubjectId);
+      var washFrequency = BuildDemographicInformation(testSubjectId);
       BuildHorizontalBarChart(testSubjectId);
       BuildBubbleChart(testSubjectId);
       //BuildGaugeChart(washFrequency);
