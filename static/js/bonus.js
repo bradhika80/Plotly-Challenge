@@ -69,41 +69,45 @@ function BuildChart(washFrequency)
 
     // build a scatter plot
 
-    var data = [{ type: 'scatter',
-        x: [0], y:[0],	
-        showlegend: false,
-        name: 'scrub washing',
-        text: level,
-        hoverinfo: 'text+name'},
-        { values: [50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9 , 50], // values for the chart, 50% sliced into 8, and remaining 50%
-        rotation: 90,
-        text: ["8-9", "7-8", "6-7", "5-6", "4-5", "3-4", "2-3", "1-2", "0-1",""], // labels for the 
-        textinfo: 'text',
-        textposition:'inside',	  
-        marker: {colors:["#023002","#046904","#057c05" , "#08da08" ,"#72fa72" , "#4cf84c","#98fb98" , "#befcbe", "#e4fee4", "white"]},
-        labels: ["8-9", "7-8", "6-7", "5-6", "4-5", "3-4", "2-3", "1-2", "0-1",""],
-        hoverinfo: 'label',
-        hole: .5,
-        type: 'pie',
-        showlegend: false
+    var data = [
+        { // create a scatter plot for the dial. The x, y values are 0
+            type: 'scatter',
+            x: [0], 
+            y:[0],	
+            showlegend: false,
+            name: 'scrub washing',
+            text: level,
+            hoverinfo: 'text+name'
+        },
+        { // create a pie chart.
+            rotation: 90,
+            values: [50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9 , 50], // values for the chart, 50% sliced into 8, and remaining 50%
+            text: ["8-9", "7-8", "6-7", "5-6", "4-5", "3-4", "2-3", "1-2", "0-1",""], // text for the each slice
+            textinfo: 'text',
+            textposition:'inside',	  // position the text inside the pie slice
+            marker: {colors:["#023002","#046904","#057c05" , "#08da08" ,"#72fa72" , "#4cf84c","#98fb98" , "#befcbe", "#e4fee4", "white"]}, // colors for each pie slice
+            labels: ["8-9", "7-8", "6-7", "5-6", "4-5", "3-4", "2-3", "1-2", "0-1",""],
+            hoverinfo: 'label',
+            hole: .5,
+            type: 'pie',
+            showlegend: false
         }];
 
     var layout = {
-    shapes:[{
-        type: 'path',
-        path: gaugePointer(level),
-        fillcolor: '850000',
-        line: {
-            color: '850000'
-        }
-        }],
-    //title: '<b>Gauge</b> <br> Speed 0-100',
+        shapes:[
+            {  // calculate the x, y positions for the dial and build a path (X0, Y0, X1, Y1)
+                type: 'path',
+                path: gaugePointer(level),
+                fillcolor: '850000',
+                line: {
+                    color: '850000'
+                }
+            }],
+        title: 'Scrubs Per Week',
         autosize:true,
-    //height: 1000,
-    //width: 1000,
-    xaxis: {zeroline:false, showticklabels:false,
+        xaxis: {zeroline:false, showticklabels:false,
                 showgrid: false, range: [-1, 1]},
-    yaxis: {zeroline:false, showticklabels:false,
+         yaxis: {zeroline:false, showticklabels:false,
                 showgrid: false, range: [-1, 1]}
     };
 
