@@ -6,6 +6,8 @@ In this assignment,  build an interactive dashboard to explore the [Belly Button
 
 The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
 
+The final project can be viewed via :- https://github.com/bradhika80/Plotly-Challenge
+
 ## Step 1: Plotly
 
 1. Use the D3 library to read in `samples.json`.
@@ -63,5 +65,6 @@ The following task is advanced and therefore optional.
 * Deploy the app to a free static page hosting service, such as GitHub Pages. Submit the links to your deployment and your GitHub repo.
 
 * Ensure the repository has regular commits (i.e. 20+ commits) and a thorough README.md file
+
 
 
