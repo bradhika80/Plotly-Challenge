@@ -2,7 +2,7 @@
 
 ![Bacteria by filterforge.com](static/Images/bacteria.jpg)
 
-In this assignment, you will build an interactive dashboard to explore the [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/), which catalogs the microbes that colonize human navels.
+In this assignment,  build an interactive dashboard to explore the [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/), which catalogs the microbes that colonize human navels.
 
 The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
 
@@ -42,7 +42,7 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 6. Update all of the plots any time that a new sample is selected.
 
-Additionally, you are welcome to create any layout that you would like for your dashboard. An example dashboard is shown below:
+Additionally, reate any layout that you would like for your dashboard. An example dashboard is shown below:
 
 ![hw](static/Images/hw02.png)
 
@@ -52,7 +52,7 @@ The following task is advanced and therefore optional.
 
 * Adapt the Gauge Chart from <https://plot.ly/javascript/gauge-charts/> to plot the weekly washing frequency of the individual.
 
-* You will need to modify the example gauge code to account for values ranging from 0 through 9.
+* Modify the example gauge code to account for values ranging from 0 through 9.
 
 * Update the chart whenever a new sample is selected.
 
@@ -60,8 +60,8 @@ The following task is advanced and therefore optional.
 
 ## Deployment
 
-* Deploy your app to a free static page hosting service, such as GitHub Pages. Submit the links to your deployment and your GitHub repo.
+* Deploy the app to a free static page hosting service, such as GitHub Pages. Submit the links to your deployment and your GitHub repo.
 
-* Ensure your repository has regular commits (i.e. 20+ commits) and a thorough README.md file
+* Ensure the repository has regular commits (i.e. 20+ commits) and a thorough README.md file
 
 
