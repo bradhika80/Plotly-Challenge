@@ -105,6 +105,7 @@ function BuildChart(washFrequency)
             }],
         title: 'Scrubs Per Week',
         autosize:true,
+        // set x and y co-ordinates
         xaxis: {zeroline:false, showticklabels:false,
                 showgrid: false, range: [-1, 1]},
          yaxis: {zeroline:false, showticklabels:false,
