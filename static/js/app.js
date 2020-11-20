@@ -19,7 +19,8 @@ function PreLoad()
       BuildDemographicInformation(testSubjectId);
       BuildHorizontalBarChart(testSubjectId);
       BuildBubbleChart(testSubjectId);
-      BuildGaugeChart(washFrequency);
+      //BuildGaugeChart(washFrequency);
+      BuildC(washFrequency);
 
     });
      
@@ -35,7 +36,7 @@ function optionChanged(testSubjectId) {
     BuildDemographicInformation(testSubjectId);
     BuildHorizontalBarChart(testSubjectId);
     BuildBubbleChart(testSubjectId);
-    BuildGaugeChart(washFrequency);
+    BuildC(washFrequency);
   }
 
 // A function to build the demographic information
@@ -45,7 +46,7 @@ function BuildDemographicInformation(testSubjectId) {
 
     testSubject = metadata.filter(d => d.id == testSubjectId)
 
-    washFrequency = testSubject[0].wq;
+    washFrequency = testSubject[0].wfreq;
    
     var demoPanel = d3.select("#sample-metadata");
     // reset the demographic panel
