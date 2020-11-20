@@ -1,12 +1,12 @@
 
-// initialize variables
+// declare global variables
 var testSubjects; 
 var metadata;
 var samples;
-var washFrequency;
+
 
 // A function to do the initialization before the page loads
-function PreLoad()
+function Initialize()
 {   // read the json and build data variables
     d3.json("data/samples.json").then((data) => {
         testSubjects = data.names;
@@ -20,7 +20,7 @@ function PreLoad()
       BuildHorizontalBarChart(testSubjectId);
       BuildBubbleChart(testSubjectId);
       //BuildGaugeChart(washFrequency);
-      BuildC(washFrequency);
+      BuildChart(washFrequency);
 
     });
      
@@ -33,10 +33,10 @@ function optionChanged(testSubjectId) {
    // d3.event.preventDefault();
     
     // Build the graphs and demographic data based on the subject Id
-    BuildDemographicInformation(testSubjectId);
+    var washFrequency = BuildDemographicInformation(testSubjectId);
     BuildHorizontalBarChart(testSubjectId);
     BuildBubbleChart(testSubjectId);
-    BuildC(washFrequency);
+    BuildChart(washFrequency);
   }
 
 // A function to build the demographic information
@@ -58,8 +58,9 @@ function BuildDemographicInformation(testSubjectId) {
         var msg = `${key}:${value}`;
         demoPanel.append("h5").text(msg);        
     });
+    return (washFrequency);
 
-  }
+}
 
 
 // function to build horizontal bar chart
@@ -71,9 +72,11 @@ function BuildHorizontalBarChart(testSubjectId)
   // testSubjectSample[0].reverse();
    console.log(testSubjectSample)
  
+   // get the first 10 values 
    var x = testSubjectSample[0].sample_values.slice(0,10);
    var y = testSubjectSample[0].otu_ids.slice(0,10);
-   var hover = testSubjectSample[0].otu_labels.slice(0,10);
+   var text = testSubjectSample[0].otu_labels.slice(0,10);
+   // add OTU to the ids
    y = y.map(i => "OTU " + i);
    console.log(y);
    console.log(x)
@@ -81,22 +84,21 @@ function BuildHorizontalBarChart(testSubjectId)
     var trace = {
         x: x,
         y: y,
-        text : hover,
+        text : text,
         type: "bar",
         orientation: "h"
     };
     
-    // 6. Create the data array for our plot
+    // Create the data array for our plot
     var data = [trace];
     
-    // 7. Define our plot layout
+    // Define our plot layout
     var layout = {
         title: "Top 10 OTUs "         
     };
     
     // 8. Plot the chart to a div tag with id "bar-plot"
-    Plotly.newPlot("bar", data, layout);
-  
+    Plotly.newPlot("bar", data, layout);  
 
 }
 
@@ -109,19 +111,19 @@ function BuildBubbleChart(testSubjectId)
    //testSubjectSample[0].reverse();
    console.log(testSubjectSample)
  
+   // get the x and y values for the bubble chart
    var x = testSubjectSample[0].sample_values;
    var y = testSubjectSample[0].otu_ids;
    var text = testSubjectSample[0].otu_labels;
 
 
    // Reference : https://plotly.com/javascript/bubble-charts/
-
    var trace =
     {
       x: x,
       y: y,
       text: text,
-      mode: "markers",
+      mode: "markers", 
       marker: {
         size: x,
         color: y,
@@ -129,28 +131,31 @@ function BuildBubbleChart(testSubjectId)
       }
     }
   
+    // Create the data array for our plot
     var data = [trace]
 
-  var layout = {
-    xaxis :{
-        "title" : "OTU Ids"
+    // Define our plot layout
+    var layout = {
+        xaxis :{
+            "title" : "OTU Ids"
+        }
     }
-  }
 
-  Plotly.plot("bubble", data, layout);
+    // 8. Plot the chart to a div tag with id "bubble-plot"
+    Plotly.plot("bubble", data, layout);
 }
 
 //function to prepopulate TestSubject Options
 function PopulateTestSubjectOptions(){
 
-       var options = d3.select("#selDataset")
-                    .selectAll('option')
-                    .data(testSubjects)
-                    .enter()
-                    .append('option')
-                    .text(function (d) { return d; });    
+    var options = d3.select("#selDataset")
+                .selectAll('option')
+                .data(testSubjects)
+                .enter()
+                .append('option')
+                .text(function (d) { return d; });    
 
 }
 
-// call the PreLoad function
-PreLoad()
+// call the Initialize function
+Initialize()
